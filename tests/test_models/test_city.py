@@ -1,72 +1,70 @@
 #!/usr/bin/python3
-"""
-    Test Case For city Model and its Test
-"""
-from models.base_model import BaseModel
-from models.city import City
+"""test for city"""
 import unittest
-import inspect
-import time
-from datetime import datetime
-import pep8 as pcs
-from unittest import mock
-import models
+import os
+from models.city import City
+from models.base_model import BaseModel
+import pep8
 
 
 class TestCity(unittest.TestCase):
-    """
-        unitesst for City class
-    """
+    """this will test the city class"""
 
-    def issub_class(self):
-        """
-            test if City class is sub class of base model
-        """
-        city = City()
-        self.assertIsInstance(city, BaseModel)
-        self.assertTrue(hasattr(city, "id"))
-        self.assertTrue(hasattr(city, "created_at"))
-        self.assertTrue(hasattr(city, "update_at"))
+    @classmethod
+    def setUpClass(cls):
+        """set up for test"""
+        cls.city = City()
+        cls.city.name = "LA"
+        cls.city.state_id = "CA"
 
-    def test_class_attribute(self):
-        """
-            test for class attribute
-        """
-        city = City()
-        self.assertTrue(hasattr(city, "name"))
-        self.assertTrue(hasattr(city, "state_id"))
-        if models.storage_type == "db":
-            self.assertEqual(city.state_id, None)
-            self.assertEqual(city.name, None)
-        else:
+    @classmethod
+    def teardown(cls):
+        """at the end of the test this will tear it down"""
+        del cls.city
+
+    def tearDown(self):
+        """teardown"""
+        try:
+            os.remove("file.json")
+        except Exception:
             pass
 
-    def test_to_dictcity(self):
-        """
-            test to dict method with city and the type
-            and content
-        """
-        city = City()
-        dict_cont = city.to_dict()
-        self.assertEqual(type(dict_cont), dict)
-        for attr in city.__dict__:
-            self.assertTrue(attr in dict_cont)
-            self.assertTrue("__class__" in dict_cont)
+    def test_pep8_City(self):
+        """Tests pep8 style"""
+        style = pep8.StyleGuide(quiet=True)
+        p = style.check_files(['models/city.py'])
+        self.assertEqual(p.total_errors, 0, "fix pep8")
 
-    def test_dict_value(self):
-        """
-            test the returned dictionar values
-        """
-        time_format = "%Y-%m-%dT%H:%M:%S.%f"
-        city = City()
-        dict_con = city.to_dict()
-        self.assertEqual(dict_con["__class__"], "City")
-        self.assertEqual(type(dict_con["created_at"]), str)
-        self.assertEqual(type(dict_con["updated_at"]), str)
-        self.assertEqual(
-            dict_con["created_at"],
-            city.created_at.strftime(time_format)
-        )
-        self.assertEqual(
-            dict_con["updated_at"],
-            city.updated_at.strftime(time_format))
+    def test_checking_for_docstring_City(self):
+        """checking for docstrings"""
+        self.assertIsNotNone(City.__doc__)
+
+    def test_attributes_City(self):
+        """chekcing if City have attributes"""
+        self.assertTrue('id' in self.city.__dict__)
+        self.assertTrue('created_at' in self.city.__dict__)
+        self.assertTrue('updated_at' in self.city.__dict__)
+        self.assertTrue('state_id' in self.city.__dict__)
+        self.assertTrue('name' in self.city.__dict__)
+
+    def test_is_subclass_City(self):
+        """test if City is subclass of Basemodel"""
+        self.assertTrue(issubclass(self.city.__class__, BaseModel), True)
+
+    def test_attribute_types_City(self):
+        """test attribute type for City"""
+        self.assertEqual(type(self.city.name), str)
+        self.assertEqual(type(self.city.state_id), str)
+
+    def test_save_City(self):
+        """test if the save works"""
+        self.city.save()
+        self.assertNotEqual(self.city.created_at, self.city.updated_at)
+
+    def test_to_dict_City(self):
+        """test if dictionary works"""
+        self.assertEqual('to_dict' in dir(self.city), True)
+
+
+if __name__ == "__main__":
+    unittest.main()
