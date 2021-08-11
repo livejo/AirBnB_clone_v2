@@ -25,7 +25,7 @@ This repository contains the initial stage of a student project to build a clone
 
 | Tasks | Files | Description |
 | ----- | ----- | ------ |
-| N/A: Authors | [AUTHORS](https://github.com/Theemiss/AirBnB_clone_v2/blob/master/AUTHORS) | Project authors |
+| N/A: Authors | [AUTHORS](https://github.com/amanabiy/AirBnB_clone_v2/blob/master/AUTHORS) | Project authors |
 | 0: README File| [README.md](https://github.com/Theemiss/AirBnB_clone_v2/blob/master/README.md) | Read Me file
 | N/A: Pep8 | N/A | All code is pep8 compliant|
 | 1: Unit Testing | [/tests](https://github.com/Theemiss/AirBnB_clone_v2/tree/master/tests) | All class-defining modules are unittested |
