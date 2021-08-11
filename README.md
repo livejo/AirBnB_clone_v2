@@ -2,7 +2,7 @@
 
 <p align="center"><img src="bnb.png" alt="AirBnb  logo"></p>
 
-## Descreption:
+## Description:
 This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 ---
@@ -169,7 +169,3 @@ No known bugs at this time.
 [Biniyam Melaku](https://github.com/BiniyamMelaku2)
 
 [Yosef kefale](https://github.com/livejo)
-
-
-<br>
-<center><img src="https://www.holbertonschool.com/holberton-logo.png"></center>
